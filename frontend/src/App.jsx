@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
-import { Header, Footer, HomeScreen } from "./filesIndex";
+import { Header, Footer } from "./filesIndex";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <Header />
       <main className="py-3">
         <Container>
-          <HomeScreen />
+          <Outlet />
         </Container>
       </main>
       <Footer />
