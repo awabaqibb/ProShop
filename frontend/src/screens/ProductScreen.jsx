@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import products from "../products";
+import products from "../../../backend/data/products";
 import {
   Button,
   Card,
@@ -11,12 +11,23 @@ import {
   Row,
 } from "react-bootstrap";
 import { Rating } from "../filesIndex";
+import axios from "axios";
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState([]);
   const { pid: productId } = useParams();
+  console.log(import.meta.env.VITE_API_URL);
+  //
+  useEffect(() => {
+    const fetchSingleProduct = async () => {
+      const { data } = await axios.get(
+        `http://localhost:5000/api/products/${productId}`
+      );
+      setProduct(data);
+    };
 
-  const product = products.find((p) => p._id === productId);
-  console.log(product);
+    fetchSingleProduct();
+  }, [productId]);
 
   return (
     <>
